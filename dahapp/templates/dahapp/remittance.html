@@ -1,0 +1,62 @@
+{% extends "base1.html" %}
+
+{% block title %} REMITTANCE {% endblock %}
+
+{% block content %}
+
+
+    <div>
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{% url "dashboard" %}">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">Cash In</li>
+        <li class="breadcrumb-item active">Today's Remittance</li>
+      </ol>
+
+      <!-- Remittance Data Entries -->
+      <div class="row">
+      <div class="col-lg-8">
+      <div class="remitForm">
+          <div class="card card-register">
+            <div class="card-header">Enter Today's Remittance Here</div>
+            <div class="card-body">
+        <form>
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="exampleInputName">USD Amount</label>
+                <input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="Enter USD Amount">
+              </div>
+              <div class="col-md-6">
+                <label for="exampleInputLastName">DJF Amount</label>
+                <input class="form-control" id="exampleInputLastName" type="text" aria-describedby="nameHelp" placeholder="Enter DJF Amount">
+              </div>
+            </div>
+          </div>
+          <a class="btn btn-primary btn-block" href="login.html">Submit</a>
+        </form>
+      </div>
+    </div>
+   </div>
+   </div>
+   <!-- The left part -->
+    <div class="col-lg-4">
+          <div class="card mb-3">
+            <div class="card-header">
+              <i class="fa fa-pie-chart"></i> Pie Chart Example</div>
+            <div class="card-body">
+              <canvas id="myPieChart" width="100%" height="100"></canvas>
+            </div>
+            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+          </div>
+    </div>
+  </div>
+    <!-- Remittance Data Entries END -->
+
+
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "base1.html" %}
+
+{% block title %} PAYMENTS {% endblock %}
+
+{% block content %}
+
+
+    <div>
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{% url "dashboard" %}">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">Cash Out</li>
+        <li class="breadcrumb-item active">Today's Payment</li>
+      </ol>
+    </div>
+
+{% endblock %}

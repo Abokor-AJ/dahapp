@@ -1,0 +1,36 @@
+
+
+{% extends "base.html" %}
+
+{% block title %}Log-In{% endblock %}
+
+{% block content %}
+
+<div class="row" style="margin-top:20px">
+  <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+    <form action="{% url "login" %}" method="post" name="Login_Form" role="form">
+      <fieldset>
+        <h3 class="form-signin-heading">Please Sign In</h3>
+
+         {% if next %}
+             {% if user.is_authenticated %}
+                 <p>Your account doesn't have access to this page. To proceed,
+                     please login with an account that has access.</p>
+             {% else %}
+                 <p>Please login to see this page.</p>
+             {% endif %}
+         {% endif %}
+        <hr ><br>
+        <center>
+          <input type="text" class="form-control input-lg" name="username" value="" id="username" placeholder="UserID" required="" autofocus="" />
+          <input type="password" class="form-control input-lg" name="password" value="" id="password" placeholder="Password" required=""/>
+          {% csrf_token %}
+        </center>
+        <input type="hidden" name="next" value="{{ next }}" />
+        <button class="btn btn-lg btn-success btn-block"  name="Submit" value="Login" type="Submit">Login</button>
+      </fieldset>
+    </form>
+  </div>
+</div>
+
+{% endblock %}
