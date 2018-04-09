@@ -32,7 +32,7 @@ class Remittance(models.Model):
     usd = models.DecimalField(max_digits=10, decimal_places=2)
     djf = models.DecimalField(max_digits=12, decimal_places=2)
     created_on = models.DateTimeField('date created')
-    created_by = models.ForeignKey(Profile)
+    created_by = models.ForeignKey(User)
 
     class Meta:
         get_latest_by = 'created_on'
@@ -42,7 +42,7 @@ class Payment(models.Model):
     usd = models.DecimalField(max_digits=10, decimal_places=2)
     djf = models.DecimalField(max_digits=12, decimal_places=2)
     created_on = models.DateTimeField('date created')
-    created_by = models.ForeignKey(Profile)
+    created_by = models.ForeignKey(User)
 
     class Meta:
         get_latest_by = 'created_on'
@@ -53,7 +53,7 @@ class OpeningBalance(models.Model):
     djf = models.DecimalField(max_digits=12, decimal_places=2)
     receiver = models.CharField(max_length=50)
     created_on = models.DateTimeField('date created')
-    created_by = models.ForeignKey(Profile)
+    created_by = models.ForeignKey(User)
     status = models.IntegerField(default=0)
 
     class Meta:
@@ -63,7 +63,7 @@ class OpeningBalance(models.Model):
 class Stamp(models.Model):
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     created_on = models.DateTimeField('date created')
-    created_by = models.ForeignKey(Profile)
+    created_by = models.ForeignKey(User)
 
     class Meta:
         get_latest_by = 'created_on'
@@ -75,7 +75,8 @@ class Cheque(models.Model):
     customer_name = models.CharField(max_length=50)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     created_on = models.DateTimeField('date created')
-    created_by = models.ForeignKey(Profile)
+    created_by = models.ForeignKey(User)
+    currency = models.CharField(max_length=5)
 
     class Meta:
         get_latest_by = 'created_on'
@@ -86,7 +87,7 @@ class Transfer(models.Model):
     description = models.CharField(max_length=100)
     received_by = models.CharField(max_length=50)
     created_on = models.DateTimeField('date created')
-    created_by = models.ForeignKey(Profile)
+    created_by = models.ForeignKey(User)
 
     class Meta:
         get_latest_by = 'created_on'
@@ -97,7 +98,7 @@ class Vouchers(models.Model):
     description = models.CharField(max_length=100)
     signed_by = models.CharField(max_length=50)
     created_on = models.DateTimeField('date created')
-    created_by = models.ForeignKey(Profile)
+    created_by = models.ForeignKey(User)
 
     class Meta:
         get_latest_by = 'created_on'
@@ -108,7 +109,7 @@ class Deposit(models.Model):
     description = models.CharField(max_length=100)
     deposited_by = models.CharField(max_length=50)
     created_on = models.DateTimeField('date created')
-    created_by = models.ForeignKey(Profile)
+    created_by = models.ForeignKey(User)
 
     class Meta:
         get_latest_by = 'created_on'
@@ -120,7 +121,7 @@ class Withdrawal(models.Model):
     withdrawn_by = models.CharField(max_length=50)
     authorized_by = models.CharField(max_length=50)
     created_on = models.DateTimeField('date created')
-    created_by = models.ForeignKey(Profile)
+    created_by = models.ForeignKey(User)
 
     class Meta:
         get_latest_by = 'created_on'
@@ -132,7 +133,7 @@ class Loan(models.Model):
     customer_name = models.CharField(max_length=50)
     authorized_by = models.CharField(max_length=50)
     created_on = models.DateTimeField('date created')
-    created_by = models.ForeignKey(Profile)
+    created_by = models.ForeignKey(User)
 
     class Meta:
         get_latest_by = 'created_on'
@@ -144,7 +145,7 @@ class Refund(models.Model):
     amount_full = models.DecimalField(max_digits=12, decimal_places=2)
     amount_net = models.DecimalField(max_digits=12, decimal_places=2)
     created_on = models.DateTimeField('date created')
-    created_by = models.ForeignKey(Profile)
+    created_by = models.ForeignKey(User)
 
     class Meta:
         get_latest_by = 'created_on'

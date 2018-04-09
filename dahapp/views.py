@@ -1,9 +1,11 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
-from .forms import LoginForm
+from .forms import LoginForm, RemitForm, PayForm
 from django.contrib.auth.decorators import login_required
 from .models import *
+from django.utils import timezone
+from django.contrib import messages
 
 
 def index(request):
@@ -37,13 +39,44 @@ def reports(request):
 
 
 def remittance(request):
-    all_remittance = Remittance.objects.all()
-    return render(request, 'dahapp/remittance.html', {'all_remittance': all_remittance})
+    # all_remittance = Remittance.objects.all()
+    # Latest_remit = Remittance.objects.latest()
+
+    if request.method == 'POST':
+        form = RemitForm(request.POST or None)
+        if form.is_valid():
+            remit = Remittance()
+            remit.usd = form.cleaned_data['usd']
+            remit.djf = form.cleaned_data['djf']
+            remit.created_on = timezone.now()
+            remit.created_by = request.user
+            remit.save()
+            messages.success(request, 'Well Done! You have successfully saved Today\'s Remittance.')
+        else:
+            messages.error(request, 'The data is not correctly stored. Please Try again!')
+    else:
+        form = RemitForm(request.POST or None)
+    return render(request, 'dahapp/remittance.html', {'form': form})
 
 
 def payment(request):
-    all_payment = Payment.objects.all()
-    return render(request, 'dahapp/payments.html', {'all_payment': all_payment})
+    # all_payment = Payment.objects.all()
+
+    if request.method == 'POST':
+        form = PayForm(request.POST or None)
+        if form.is_valid():
+            pay = Payment()
+            pay.usd = form.cleaned_data['usd']
+            pay.djf = form.cleaned_data['djf']
+            pay.created_on = timezone.now()
+            pay.created_by = request.user
+            pay.save()
+            messages.success(request, 'Well Done! You have successfully saved Today\'s Payment.')
+        else:
+            messages.error(request, 'The data is not correctly stored. Please Try again!')
+    else:
+        form = PayForm(request.POST or None)
+    return render(request, 'dahapp/payments.html', {'form': form})
 
 
 def opening_balance(request):
@@ -57,8 +90,23 @@ def stamps(request):
 
 
 def cheques(request):
-    all_cheque = Cheque.objects.all()
-    return render(request, 'dahapp/cheques.html', {'all_cheque': all_cheque})
+    # all_cheque = Cheque.objects.all()
+
+    if request.method == 'POST':
+        form = ChequeForm(request.POST or None)
+        if form.is_valid():
+            Cheque = Cheque()
+            Cheque.usd = form.cleaned_data['usd']
+            Cheque.djf = form.cleaned_data['djf']
+            Cheque.created_on = timezone.now()
+            Cheque.created_by = request.user
+            Cheque.save()
+            messages.success(request, 'Well Done! You have successfully saved The data.')
+        else:
+            messages.error(request, 'The data is not correctly stored. Please Try again!')
+    else:
+        form = ChequeForm(request.POST or None)
+    return render(request, 'dahapp/cheques.html', {'form': form})
 
 
 def transfer(request):

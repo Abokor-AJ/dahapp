@@ -12,8 +12,46 @@
           <a href="{% url "dashboard" %}">Dashboard</a>
         </li>
         <li class="breadcrumb-item active">Cash In</li>
-        <li class="breadcrumb-item active">Cheques</li>
+        <li class="breadcrumb-item active">Today's Cheques</li>
       </ol>
+
+      <!-- Cheques Data Entries -->
+      <div class="row">
+      <div class="col-lg-8">
+
+      <div class="card mb-3">
+          <div class="card-header">Enter Today's Cheques Here</div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-8 my-auto">
+
+                  <form class="form-horizontal" role="form" method="post" novalidate>
+                        {% include 'includes/messages.html' %}
+                        {% csrf_token %}
+                        {% include 'includes/form.html' %}
+                      <input class="btn btn-success btn-block" type="submit" name="submit" value="Submit" />
+                  </form>
+                </div>
+              </div>
+            </div>
+      </div>
+
+      </div>
+
+   <!-- The left part -->
+    <div class="col-lg-4">
+          <div class="card mb-3">
+            <div class="card-header">Today's Cheques Statistics</div>
+            <div class="card-body">
+
+            </div>
+          </div>
+    </div>
+  </div>
+    <!-- Cheques Data Entries END -->
+
+
+
     </div>
 
 {% endblock %}

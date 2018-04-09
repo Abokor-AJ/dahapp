@@ -20,25 +20,17 @@
       <div class="col-lg-8">
 
       <div class="card mb-3">
-            <div class="card-header">Enter Today's Remittance Here</div>
+          <div class="card-header">Enter Today's Remittance Here</div>
             <div class="card-body">
               <div class="row">
                 <div class="col-sm-8 my-auto">
-                    <form>
-                    <div class="form-group">
-                    <div class="form-row">
-                     <div class="col-md-6">
-                     <label for="exampleInputName">USD Amount</label>
-                     <input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="Enter USD Amount">
-                    </div>
-                    <div class="col-md-6">
-                    <label for="exampleInputLastName">DJF Amount</label>
-                    <input class="form-control" id="exampleInputLastName" type="text" aria-describedby="nameHelp" placeholder="Enter DJF Amount">
-                </div>
-            </div>
-            </div>
-                <a class="btn btn-primary btn-block" href="login.html">Submit</a>
-                    </form>
+
+                  <form class="form-horizontal" role="form" method="post" novalidate>
+                        {% include 'includes/messages.html' %}
+                        {% csrf_token %}
+                        {% include 'includes/form.html' %}
+                      <input class="btn btn-success btn-block" type="submit" name="submit" value="Submit" />
+                  </form>
                 </div>
               </div>
             </div>
@@ -49,7 +41,7 @@
    <!-- The left part -->
     <div class="col-lg-4">
           <div class="card mb-3">
-            <div class="card-header">Pie Chart Example</div>
+            <div class="card-header">Remittance's Statistics</div>
             <div class="card-body">
 
             </div>
