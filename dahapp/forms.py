@@ -49,15 +49,26 @@ class PayForm(forms.ModelForm):
 
 class ChequeForm(forms.ModelForm):
     cheque_no = forms.CharField(max_length=15,
-                                widget=forms.TextInput(attrs={'placeholder': 'Enter Cheque number'}))
+                                widget=forms.TextInput(attrs={'placeholder': 'Cheque number'}))
     bank_name = forms.CharField(max_length=20,
-                                widget=forms.TextInput(attrs={'placeholder': 'Enter Bank Name'}))
+                                widget=forms.TextInput(attrs={'placeholder': 'Bank Name'}))
     customer_name = forms.CharField(max_length=50,
-                                    widget=forms.TextInput(attrs={'placeholder': 'Enter Customer Name'}))
+                                    widget=forms.TextInput(attrs={'placeholder': 'Customer Name'}))
     amount = forms.DecimalField(max_digits=10, decimal_places=2,
-                                widget=forms.TextInput(attrs={'placeholder': 'Enter Amount'}))
-    currency = forms.CharField(max_length=5)
+                                widget=forms.TextInput(attrs={'placeholder': 'Amount'}))
+    currency = forms.CharField(max_length=5,
+                               widget=forms.TextInput(attrs={'placeholder': 'currency'}))
 
     class Meta:
         model = Cheque
         fields = ('cheque_no', 'bank_name', 'customer_name', 'amount', 'currency',)
+
+    def clean(self):
+        cd = super(ChequeForm, self).clean()
+        cheque_no = cd.get('cheque_no')
+        bank_name = cd.get('bank_name')
+        customer_name = cd.get('customer_name')
+        amount = cd.get('amount')
+        currency = cd.get('currency')
+        if not cheque_no and not bank_name:
+            raise forms.ValidationError('Please enter the correct data.')

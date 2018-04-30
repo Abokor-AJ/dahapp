@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
-from .forms import LoginForm, RemitForm, PayForm
+from .forms import LoginForm, RemitForm, PayForm, ChequeForm
 from django.contrib.auth.decorators import login_required
 from .models import *
 from django.utils import timezone
@@ -95,12 +95,15 @@ def cheques(request):
     if request.method == 'POST':
         form = ChequeForm(request.POST or None)
         if form.is_valid():
-            Cheque = Cheque()
-            Cheque.usd = form.cleaned_data['usd']
-            Cheque.djf = form.cleaned_data['djf']
-            Cheque.created_on = timezone.now()
-            Cheque.created_by = request.user
-            Cheque.save()
+            cheques = Cheque()
+            cheques.cheque_no = form.cleaned_data['cheque_no']
+            cheques.bank_name = form.cleaned_data['bank_name']
+            cheques.customer_name = form.cleaned_data['customer_name']
+            cheques.amount = form.cleaned_data['amount']
+            cheques.currency = form.cleaned_data['currency']
+            cheques.created_on = timezone.now()
+            cheques.created_by = request.user
+            cheques.save()
             messages.success(request, 'Well Done! You have successfully saved The data.')
         else:
             messages.error(request, 'The data is not correctly stored. Please Try again!')

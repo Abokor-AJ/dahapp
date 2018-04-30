@@ -76,7 +76,7 @@ class Cheque(models.Model):
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     created_on = models.DateTimeField('date created')
     created_by = models.ForeignKey(User)
-    currency = models.CharField(max_length=5)
+    currency = models.CharField(max_length=5, default="USD")
 
     class Meta:
         get_latest_by = 'created_on'
